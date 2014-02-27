@@ -89,8 +89,8 @@ class Knapsack(object):
     def print_results(self):
         print 'Computing...'
         self.compute_aproximated()
-        print 'Best founded solution\t: ', self.optimal
+        print 'Best objective found\t: ', self.optimal
         print 'Last weight\t\t: ', self.last_weight
-        print 'Time\t\t\t: ', self.get_time(), '\t secs'
-        print 'Memory\t\t\t: ', self.get_bytes(), '\t\t bytes'
+        print 'Time\t\t\t: ', self.get_time(), 'secs'
+        print 'Memory\t\t\t: ', self.get_bytes(), 'bytes'
         

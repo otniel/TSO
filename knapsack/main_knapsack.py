@@ -22,7 +22,13 @@ from qbh import QuotientBasedHeuristic
 
 def readInstance(file_name):
     # Build the instance based on the lines of a given file
-    instance = [item.rstrip('\n') for item in list(open(file_name))]
+    try:
+        instance_file = open(file_name)
+    except IOError:
+        print 'File not found!'
+        exit()
+
+    instance = [item.rstrip('\n') for item in list(instance_file)]
     instance = instance[:3]
     instance = [item.split() for item in instance]
     
