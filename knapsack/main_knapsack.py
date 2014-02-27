@@ -1,4 +1,17 @@
-# -*- coding: utf-8 -*-
+
+__author__          = "Pablo Otniel Aguilar-Izaguirre" 
+__date__            = "Feb 26, 2014" 
+__registration__    = "1475648" 
+__institution__     = "UANL - FIME"
+__email__           = "otnieel.aguilar@gmail.com" 
+__license__         = "GNU General Public License"
+__version__         = "3 (GPL-3.0)" 
+__copyright__       = "Copyright (C) 2014"
+
+"""
+    Main script
+"""
+
 import sys
 import re
 
@@ -8,34 +21,35 @@ from wbh import WeightBasedHeuristic
 from qbh import QuotientBasedHeuristic
 
 def readInstance(file_name):
-    # Se crea la instancia (lista con las lineas del archivo)
+    # Build the instance based on the lines of a given file
     instance = [item.rstrip('\n') for item in list(open(file_name))]
     instance = instance[:3]
     instance = [item.split() for item in instance]
     
-    for item in instance:
-        print item
+    # DEBUGIN'
+    # for item in instance:
+    #    print item
 
-    # Validación de contenido del archivo
+    # File content validations
     for line in instance:
         for char in line:
             if re.match('[^\p{L}\d\s_]', char):
-                print 'El archivo solo debe contener números, no caracteres especiales'
+                print 'The file must have only numbers, not special characters'
                 exit()
             if char.isalpha():
-                print 'El archivo solo debe contener números, no letras'
+                print 'The file must have only numbers, not letters'
                 exit()
             if re.match('^\d+?\.\d+?$', char):
-                print 'El archivo solo debe contener números enteros'
+                print 'The file must have only integer numbers'
                 exit()
             if int(char) < 0:
-                print 'El archivo solo debe contener números positivos'
+                print 'The file must have only positive numbers'
                 exit()
             
     return instance
 
 if len(sys.argv) != 2:
-    print 'Uso: python brutal_knapsack.py ARCHIVO_INSTANCIA'
+    print 'Usage: python main_knapsack.py INSTANCE_FILE'
     exit()
 
 def main(file_name):
@@ -47,24 +61,25 @@ def main(file_name):
     w = [item for item in instance[1]]
     a = [item for item in instance[2]]
 
-    print 'Brutal'
-    knapsack = BrutalKnapsack(n, W, a, w)
-    knapsack.print_results()
-    print '\n\n'
+    # DEBUGGIN'
+    # print 'Brutal'
+    # knapsack = BrutalKnapsack(n, W, a, w)
+    # knapsack.print_results()
+    # print '\n'
    
-    print 'Basado en valores'
+    print 'Value Based'
     knapsack = ValueBasedHeuristic(n, W, a, w)
     knapsack.print_results()
-    print '\n\n'
+    print '\n'
         
-    print 'Basado en pesos'
+    print 'Weight Based'
     knapsack = WeightBasedHeuristic(n, W, a, w)
     knapsack.print_results()
-    print '\n\n'
+    print '\n'
 
-    print 'Basado en coeficientes'
+    print 'Quotient Based'
     knapsack = QuotientBasedHeuristic(n, W, a, w)
     knapsack.print_results()
-    print '\n\n'
+    print '\n'
 
 main(sys.argv[1])

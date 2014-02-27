@@ -1,9 +1,15 @@
-# -*- coding: utf-8 -*-
+
+__author__          = "Pablo Otniel Aguilar-Izaguirre" 
+__date__            = "Feb 26, 2014" 
+__registration__    = "1475648" 
+__institution__     = "UANL - FIME"
+__email__           = "otnieel.aguilar@gmail.com" 
+__license__         = "GNU General Public License"
+__version__         = "3 (GPL-3.0)" 
+__copyright__       = "Copyright (C) 2014"
 
 """
-    Clase padre de donde se heredan métodos para resolver el problema de la mochila
-    Autor: Pablo Otniel Aguilar Izaguirre
-    Matrícula: 1475648
+    Parent class where methods used to solve the Knapsack Problem are inherited
 """
 
 import itertools
@@ -13,7 +19,7 @@ import resource
 class Knapsack(object):
     def __init__(self, total_items, max_weight, values, weights):
         if total_items != len(values) or total_items != len(weights):
-            print 'La cantidad de elementos tanto de valores como de pesos deben ser iguales a el total de items'
+            print 'The number of elements of both values and weights must be equal to the total items'
             quit()
             
         self.total_items = int(total_items)
@@ -39,14 +45,18 @@ class Knapsack(object):
         self.optimals = [(self.total_weight, self.total_value)]
         print 'La suma de los pesos de todos los objetos no excede la capacidad de la mochila'
         self.optimal = self.total_value
-        # Tiempo
+        # Time
         self.time = time.time() - start
-        # Memoria 
+        # Memory
         self.bytes = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024.0
 
 
     def compute_optimal(self):
         pass
+
+    def compute_approximated(self):
+        pass
+
     def get_feasibles(self):
         return self.feasibles
     
@@ -77,11 +87,10 @@ class Knapsack(object):
         return sorted(matriz, key=lambda index: index[1], reverse=True)
 
     def print_results(self):
-        print 'Calculando...'
-        self.compute_optimal()
-        
-        print 'Solución óptima = ', self.optimal
-        print 'Último peso = ', self.last_weight
-        print 'Tiempo: ', self.get_time(), 'segundos'
-        print 'Memoria: ', self.get_bytes(), 'bytes'
+        print 'Computing...'
+        self.compute_aproximated()
+        print 'Best founded solution\t: ', self.optimal
+        print 'Last weight\t\t: ', self.last_weight
+        print 'Time\t\t\t: ', self.get_time(), '\t secs'
+        print 'Memory\t\t\t: ', self.get_bytes(), '\t\t bytes'
         

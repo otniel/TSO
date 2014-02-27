@@ -1,9 +1,15 @@
-# -*- coding: utf-8 --*
+
+__author__          = "Pablo Otniel Aguilar-Izaguirre" 
+__date__            = "Feb 26, 2014" 
+__registration__    = "1475648" 
+__institution__     = "UANL - FIME"
+__email__           = "otnieel.aguilar@gmail.com" 
+__license__         = "GNU General Public License"
+__version__         = "3 (GPL-3.0)" 
+__copyright__       = "Copyright (C) 2014"
 
 """
-    Heurística basada en pesos 
-    Autor: Pablo Otniel Aguilar Izaguirre
-    Matrícula: 1475648
+    Weight Based Heuristic
 """
 
 from knapsack import *
@@ -12,7 +18,7 @@ class WeightBasedHeuristic(Knapsack):
     def __init__(self, total_items, max_weight, values, weights):
         Knapsack.__init__(self, total_items, max_weight, values, weights)
     
-    def compute_optimal(self):
+    def compute_aproximated(self):
         if self.all_fit_in_knapsack():
             self.fill_with_all()
         else:
@@ -24,7 +30,8 @@ class WeightBasedHeuristic(Knapsack):
                 if current_weight <= self.max_weight:
                     weight = item[0]
                     value = item[1]
-                    print (weight, value)
+                    # DEBUGGIN'
+                    # print (weight, value)
                     self.optimal += value
                 else:
                     current_weight -= item[0]
